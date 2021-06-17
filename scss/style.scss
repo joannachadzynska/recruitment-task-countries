@@ -1,0 +1,140 @@
+@use 'abstracts' as *;
+@use 'base' as *;
+@use 'utilities' as *;
+
+body {
+	font-family: 'Poppins', sans-serif;
+	font-size: 1.125rem;
+	// overflow-x: hidden;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+header,
+main {
+	flex: 1;
+	margin-top: 5rem;
+}
+
+footer {
+	flex-shrink: 0;
+	background-color: var(--clr-primary-400);
+	color: #fff;
+
+	small {
+		padding: 1.5rem 0;
+		display: inline-block;
+		text-align: center;
+		width: 100%;
+	}
+}
+
+nav {
+	padding: 1.5rem 0;
+	background-color: var(--clr-primary-400);
+	color: #fff;
+	width: 100%;
+	position: fixed;
+	text-align: center;
+	z-index: 999;
+
+	@include mq(small) {
+		padding: 0;
+	}
+}
+
+.nav__container {
+	background-color: var(--clr-primary-400);
+	position: absolute;
+	text-align: left;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	transform: scale(1, 0);
+	transform-origin: top;
+	transition: transform 400ms ease-in-out;
+
+	:nth-child(1) {
+		margin-right: auto;
+	}
+
+	li:not(:nth-child(1)),
+	a {
+		// padding: 0 1rem;
+		cursor: pointer;
+		text-transform: uppercase;
+
+		padding: 1rem 0;
+	}
+}
+
+.nav-toggle__input {
+	position: absolute !important;
+	top: -9999px !important;
+	left: -9999px !important;
+}
+
+.nav-toggle__label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-left: 1em;
+	height: 100%;
+	display: flex;
+	align-items: center;
+
+	span,
+	span::before,
+	span::after {
+		display: block;
+		background: white;
+		height: 2px;
+		width: 2em;
+		border-radius: 2px;
+		position: relative;
+	}
+
+	span::before,
+	span::after {
+		content: '';
+		position: absolute;
+	}
+
+	span::before {
+		bottom: 7px;
+	}
+
+	span::after {
+		top: 7px;
+	}
+}
+
+.nav-toggle__input {
+	&:checked ~ ul {
+		transform: scale(1, 1);
+	}
+	// transform: scale(1, 1);
+}
+
+nav > .container {
+	@include mq(small) {
+		position: static;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.nav-toggle__label {
+			display: none;
+		}
+		.nav__container {
+			all: unset;
+			display: flex;
+			align-items: center;
+			list-style: none;
+			li + li {
+				padding-left: 2rem;
+			}
+		}
+	}
+}
