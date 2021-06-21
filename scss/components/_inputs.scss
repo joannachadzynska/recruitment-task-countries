@@ -1,0 +1,84 @@
+@use '../abstracts' as *;
+
+$w: 20em;
+$h: 1em;
+
+.filter-box {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.slide-range {
+	display: grid;
+	grid-template-rows: max-content 1em;
+	margin: 1em auto;
+	width: 20em;
+
+	position: relative;
+	background: linear-gradient(0deg, #ccc $h, transparent 0);
+
+	input[type='range'] {
+		grid-column: 1;
+		grid-row: 2;
+		cursor: pointer;
+
+		&::-webkit-slider-runnable-track,
+		&::-webkit-slider-thumb,
+		& {
+			-webkit-appearance: none;
+		}
+
+		background: none;
+		color: #000;
+		font: inherit;
+		margin: 0;
+		pointer-events: none;
+
+		&::-webkit-slider-runnable-track {
+			@include track;
+		}
+		&::-moz-range-track {
+			@include track;
+		}
+
+		&::-webkit-slider-thumb {
+			@include thumb;
+		}
+		&::-moz-range-thumb {
+			@include thumb;
+		}
+	}
+
+	input[type='range']#min_population {
+		&::-webkit-slider-thumb,
+		&::-moz-range-thumb {
+			background-color: red;
+		}
+	}
+
+	input[type='range']#max_population {
+		&::-webkit-slider-thumb,
+		&::-moz-range-thumb {
+			background-color: blue;
+		}
+	}
+
+	output {
+		position: absolute;
+		bottom: -2rem;
+		&.min_population {
+			left: 0;
+		}
+
+		&.max_population {
+			right: 0;
+		}
+	}
+}
+
+.sr-only {
+	position: absolute;
+	clip-path: inset(50%);
+}
