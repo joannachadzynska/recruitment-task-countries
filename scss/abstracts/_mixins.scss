@@ -7,3 +7,22 @@
 		@content;
 	}
 }
+
+$w: 20em;
+$h: 1em;
+
+@mixin track() {
+	background: none;
+	height: 100%;
+	width: 100%;
+	cursor: pointer;
+}
+
+@mixin thumb() {
+	background: currentColor;
+	border: none;
+	border-radius: 50%;
+	pointer-events: auto;
+	width: $h;
+	height: $h;
+}
