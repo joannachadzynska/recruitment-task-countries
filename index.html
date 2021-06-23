@@ -1,100 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-			rel="stylesheet"
-		/>
-		<link rel="stylesheet" href="./css/style.css" />
-		<title>Country.io</title>
-	</head>
-	<body>
-		<nav>
-			<div class="container">
-				<input type="checkbox" id="nav-toggle" class="nav-toggle__input" />
-				<div class="logo">
-					<a href="index.html">Countries.io</a>
-				</div>
-				<ul class="container nav__container">
-					<li>
-						<a href="dashboard.html">Dashboard</a>
-					</li>
-					<li>toggle theme</li>
-				</ul>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./css/style.css" />
+        <title>Country.io</title>
+    </head>
 
-				<label for="nav-toggle" class="nav-toggle__label">
-					<span></span>
-				</label>
-			</div>
-		</nav>
-		<header>
-			<div class="container">
-				<h1>Home</h1>
-			</div>
-		</header>
+    <body>
+        <nav>
+            <div class="container">
+                <input
+                    type="checkbox"
+                    id="nav-toggle"
+                    class="nav-toggle__input"
+                />
+                <div class="logo">
+                    <a href="index.html">Countries.io</a>
+                </div>
+                <ul class="container nav__container">
+                    <li>
+                        <a href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li>toggle theme</li>
+                </ul>
 
-		<main>
-			<div class="container">
-				<form class="filter-box">
-					<fieldset>
-						<input type="text" name="search" id="search" />
-						<label for="search">Search</label>
-					</fieldset>
-					<fieldset
-						class="slide-range"
-						role="group"
-						aria-labelledby="multi-lbl"
-					>
-						<div id="multi-lbl">Multi thumb slider</div>
-						<label class="sr-only" for="min_population">Min Population</label>
-						<input
-							type="range"
-							name="min_population"
-							id="min_population"
-							min="0"
-							value="0"
-							max="140000"
-						/>
-						<output for="min_population" class="min_population"></output>
+                <label for="nav-toggle" class="nav-toggle__label">
+                    <span></span>
+                </label>
+            </div>
+        </nav>
+        <header>
+            <div class="container">
+                <h1>Home</h1>
+            </div>
+        </header>
 
-						<label class="sr-only" for="max_population">Max Population</label>
-						<input
-							type="range"
-							name="max_population"
-							id="max_population"
-							min="0"
-							max="140000"
-							step="1000"
-						/>
-						<output for="max_population" class="max_population"></output>
-					</fieldset>
-				</form>
-				<br />
-				<table id="countries-container">
-					<thead>
-						<tr>
-							<th scope="col" id="name">Name</th>
-							<th scope="col" id="currency">Currency</th>
-							<th scope="col" id="language">Language</th>
-							<th scope="col" id="population">Population</th>
-							<th scope="col" id="area">Area</th>
-							<th scope="col">Flag</th>
-						</tr>
-					</thead>
-					<tbody id="table-body"></tbody>
-				</table>
-			</div>
-		</main>
+        <main>
+            <div class="container">
+                <form class="filter-box">
+                    <fieldset class="search">
+                        <input
+                            class="search-input"
+                            type="text"
+                            name="search"
+                            id="search"
+                            placeholder="Search Country"
+                            role="searchbox"
+                        />
+                        <!-- <label class="search-label" for="search"></label> -->
+                    </fieldset>
+                    <fieldset
+                        class="slide-range"
+                        role="group"
+                        aria-labelledby="multi-lbl"
+                    >
+                        <div id="multi-lbl">Population</div>
+                        <label class="sr-only" for="min_population"
+                            >Min Population</label
+                        >
+                        <input
+                            type="range"
+                            name="min_population"
+                            id="min_population"
+                            min="0"
+                            value="0"
+                            max="140000"
+                        />
+                        <output
+                            for="min_population"
+                            class="min_population"
+                        ></output>
 
-		<footer>
-			<div class="container">
-				<small>Joanna Chądzyńska</small>
-			</div>
-		</footer>
-		<script src="./js/main.js"></script>
-	</body>
+                        <label class="sr-only" for="max_population"
+                            >Max Population</label
+                        >
+                        <input
+                            type="range"
+                            name="max_population"
+                            id="max_population"
+                            min="0"
+                            max="140000"
+                            step="1000"
+                        />
+                        <output
+                            for="max_population"
+                            class="max_population"
+                        ></output>
+                    </fieldset>
+
+                    <fieldset class="select-fieldset">
+                        <select name="sort-by" id="sort-by">
+                            <option value="" disabled>Sort by:</option>
+                            <option value="name">Name</option>
+                            <option value="currency">Currency</option>
+                            <option value="language">Language</option>
+                            <option value="population">Population</option>
+                            <option value="area">Area</option>
+                        </select>
+                        <div class="select-icon"></div>
+                    </fieldset>
+                </form>
+                <br />
+                <table id="countries-container">
+                    <thead>
+                        <tr>
+                            <th scope="col" id="name">Name</th>
+                            <th scope="col" id="currency">Currency</th>
+                            <th scope="col" id="language">Language</th>
+                            <th scope="col" id="population">Population</th>
+                            <th scope="col" id="area">Area</th>
+                            <th scope="col">Flag</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer>
+            <div class="container">
+                <small>Joanna Chądzyńska</small>
+            </div>
+        </footer>
+        <script src="./js/main.js"></script>
+    </body>
 </html>
