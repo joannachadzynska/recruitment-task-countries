@@ -1,71 +1,113 @@
 @use '../abstracts' as *;
 
 table {
-	border: 0;
-	border-collapse: collapse;
+    border: 0;
+    width: 100%;
 
-	thead {
-		border: none;
-		clip: rect(0 0 0 0);
-		height: 1px;
-		margin: -1px;
-		overflow: hidden;
-		padding: 0;
-		position: absolute;
-		width: 1px;
-	}
+    thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        position: absolute;
+        width: 1px;
+    }
 
-	tr {
-		border-bottom: 3px solid #ddd;
-		display: block;
-		margin-bottom: 0.625em;
-	}
+    tbody,
+    tr,
+    th,
+    td {
+        display: block;
+    }
 
-	td {
-		border-bottom: 1px solid #ddd;
-		display: block;
-		font-size: 0.8em;
-		text-align: right;
+    th,
+    td {
+        padding: 0.5em;
+        display: flex;
+        align-content: center;
+        justify-content: space-between;
+    }
 
-		&::before {
-			/*
-    * aria-label has no advantage, it won't be read inside a table
-    content: attr(aria-label);
-    */
-			content: attr(data-label);
-			float: left;
-			font-weight: bold;
-			text-transform: uppercase;
-		}
-	}
+    tr {
+        background-color: var(--clr-neutral-100);
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+        margin-bottom: 1em;
+        transition: box-shadow 0.2s ease-in-out;
+        &:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+    }
 
-	@include mq(medium) {
-		border-collapse: collapse;
-		border: 1px solid #ccc;
-		margin: 0;
-		padding: 0;
-		width: 100%;
-		table-layout: fixed;
+    td {
+        border-bottom: 1px solid #ddd;
+        font-size: 0.8em;
+        text-align: right;
 
-		tr {
-			background-color: #f8f8f8;
-			border: 1px solid #ddd;
-			padding: 0.35em;
+        &[data-label="Flag"] img {
+            display: block;
+            max-width: 50px;
+            object-fit: cover;
+        }
 
-			th,
-			td {
-				padding: 0.625em;
-				text-align: center;
-			}
+        &::before {
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    }
 
-			th {
-				font-size: 0.85em;
-				letter-spacing: 0.1em;
-				text-transform: uppercase;
-			}
+    @include mq(small) {
+        border-collapse: collapse;
+        border: 1px solid #ccc;
+        table-layout: fixed;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 
-			td {
-			}
-		}
-	}
+        thead {
+            position: relative;
+            clip: auto;
+            height: auto;
+            overflow: auto;
+        }
+
+        tbody {
+            display: table-row-group;
+        }
+
+        tr {
+            border: 1px solid #ddd;
+            display: table-row;
+            transition: background-color 0.2s ease-in-out;
+
+            &:hover:not(thead tr) {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+                background-color: darken(#fcfcfc, 10);
+            }
+
+            th,
+            td {
+                padding: 0.625em;
+                display: table-cell;
+                text-align: center;
+            }
+
+            th {
+                font-size: 0.85em;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                background-color: var(--clr-neutral-400);
+                color: var(--clr-neutral-100);
+            }
+
+            td {
+                &[data-label="Flag"] img {
+                    margin: 0 auto;
+                }
+                &::before {
+                    content: none;
+                }
+            }
+        }
+    }
 }

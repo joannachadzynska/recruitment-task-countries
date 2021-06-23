@@ -1,3 +1,5 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 /* Box sizing rules */
 *,
 *::before,
@@ -89,10 +91,10 @@ body {
 }
 
 :root {
-  --clr-primary-400: #5683f0;
+  --clr-primary-400: #124bce;
   --clr-secondary-400: #e600bb;
   --clr-secondary-500: #b311ff;
-  --clr-neutral-100: #fff;
+  --clr-neutral-100: #fcfcfc;
   --clr-neutral-400: #737a82;
   --clr-neutral-800: #282b2f;
   --clr-neutral-900: #1a1c1d;
@@ -182,20 +184,76 @@ body {
   background-color: var(--clr-neutral-900) !important;
 }
 
+fieldset {
+  border: none;
+}
+
 .filter-box {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1em;
+  margin-bottom: 2em;
+}
+.filter-box .search {
+  width: 100%;
+}
+.filter-box .slide-range {
+  width: 100%;
+}
+@media only screen and (min-width: 40em) {
+  .filter-box {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  .filter-box .search {
+    width: 40%;
+  }
+  .filter-box .slide-range {
+    width: 40%;
+  }
+}
+
+.search {
+  position: relative;
+}
+.search-input {
+  background: #fff;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  font-size: 1.2rem;
+  padding: 0.5em;
+  width: 100%;
+  position: relative;
+}
+.search-label {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: inset 0 0 0 5px #000;
+  transform: translateY(-50%);
+}
+.search-label::before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  right: 0;
+  width: 5px;
+  height: 15px;
+  background-color: #000;
+  border-radius: 5px;
+  transform: rotate(-55deg);
+  transform-origin: left top;
 }
 
 .slide-range {
   display: grid;
   grid-template-rows: max-content 1em;
-  margin: 1em auto;
-  width: 20em;
   position: relative;
-  background: linear-gradient(0deg, #ccc 1em, transparent 0);
 }
 .slide-range input[type=range] {
   grid-column: 1;
@@ -211,14 +269,16 @@ body {
   -webkit-appearance: none;
 }
 .slide-range input[type=range]::-webkit-slider-runnable-track {
-  background: none;
-  height: 100%;
+  background: linear-gradient(0deg, #ccc 1em, transparent 0);
+  border-radius: 4px;
+  height: 5px;
   width: 100%;
   cursor: pointer;
 }
 .slide-range input[type=range]::-moz-range-track {
-  background: none;
-  height: 100%;
+  background: linear-gradient(0deg, #ccc 1em, transparent 0);
+  border-radius: 4px;
+  height: 5px;
   width: 100%;
   cursor: pointer;
 }
@@ -260,9 +320,49 @@ body {
   clip-path: inset(50%);
 }
 
+.select-fieldset {
+  position: relative;
+}
+.select-fieldset select {
+  width: 100%;
+  height: 50px;
+  font-size: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0;
+  background-color: var(--clr-primary-400);
+  border: none;
+  border-bottom: 2px solid #0a2970;
+  color: white;
+  padding: 10px;
+  padding-right: 38px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  /* Adding transition effect */
+  transition: color 0.3s ease, background-color 0.3s ease, border-bottom-color 0.3s ease;
+  /* For IE <= 11 */
+}
+.select-fieldset select::-ms-expand {
+  display: none;
+}
+.select-fieldset select:focus .select-icon::after {
+  content: "";
+}
+.select-fieldset .select-icon::after {
+  content: "";
+  color: #fff;
+  font-family: "Material Icons";
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 2rem;
+}
+
 table {
   border: 0;
-  border-collapse: collapse;
+  width: 100%;
 }
 table thead {
   border: none;
@@ -270,81 +370,91 @@ table thead {
   height: 1px;
   margin: -1px;
   overflow: hidden;
-  padding: 0;
   position: absolute;
   width: 1px;
 }
-table tr {
-  border-bottom: 3px solid #ddd;
+table tbody,
+table tr,
+table th,
+table td {
   display: block;
-  margin-bottom: 0.625em;
+}
+table th,
+table td {
+  padding: 0.5em;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+table tr {
+  background-color: var(--clr-neutral-100);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1em;
+  transition: box-shadow 0.2s ease-in-out;
+}
+table tr:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 table td {
   border-bottom: 1px solid #ddd;
-  display: block;
   font-size: 0.8em;
   text-align: right;
 }
+table td[data-label=Flag] img {
+  display: block;
+  max-width: 50px;
+  object-fit: cover;
+}
 table td::before {
-  /*
-   * aria-label has no advantage, it won't be read inside a table
-   content: attr(aria-label);
-   */
   content: attr(data-label);
   float: left;
   font-weight: bold;
   text-transform: uppercase;
 }
-@media only screen and (min-width: 65em) {
+@media only screen and (min-width: 40em) {
   table {
     border-collapse: collapse;
     border: 1px solid #ccc;
-    margin: 0;
-    padding: 0;
-    width: 100%;
     table-layout: fixed;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  }
+  table thead {
+    position: relative;
+    clip: auto;
+    height: auto;
+    overflow: auto;
+  }
+  table tbody {
+    display: table-row-group;
   }
   table tr {
-    background-color: #f8f8f8;
     border: 1px solid #ddd;
-    padding: 0.35em;
+    display: table-row;
+    transition: background-color 0.2s ease-in-out;
+  }
+  table tr:hover:not(thead tr) {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    background-color: #e3e3e3;
   }
   table tr th,
 table tr td {
     padding: 0.625em;
+    display: table-cell;
     text-align: center;
   }
   table tr th {
     font-size: 0.85em;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    background-color: var(--clr-neutral-400);
+    color: var(--clr-neutral-100);
   }
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-  font-size: 1.125rem;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-header,
-main {
-  flex: 1;
-  margin-top: 5rem;
-}
-
-footer {
-  flex-shrink: 0;
-  background-color: var(--clr-primary-400);
-  color: #fff;
-}
-footer small {
-  padding: 1.5rem 0;
-  display: inline-block;
-  text-align: center;
-  width: 100%;
+  table tr td[data-label=Flag] img {
+    margin: 0 auto;
+  }
+  table tr td::before {
+    content: none;
+  }
 }
 
 nav {
@@ -443,6 +553,37 @@ nav {
   nav > .container .nav__container li + li {
     padding-left: 2rem;
   }
+}
+
+*::selection {
+  user-select: none;
+}
+
+body {
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: "Roboto", sans-serif;
+  font-size: 1.125rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header,
+main {
+  flex: 1;
+  margin-top: 5rem;
+}
+
+footer {
+  flex-shrink: 0;
+  background-color: var(--clr-primary-400);
+  color: #fff;
+}
+footer small {
+  padding: 1.5rem 0;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */
